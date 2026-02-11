@@ -4,7 +4,19 @@
 
 #include <iostream>
 
+bool hit_sphere(const point3& center, double radius, const ray& r) {
+    vec3 oc = center - r.origin(); // (C - Q), sphere center - camera viewpoint
+    auto a = dot(r.direction(), r.direction()); // d * d
+    auto b = -2.0 * dot(r.direction(), oc); // -2d * (C - Q)
+    auto c = dot(oc, oc) - radius * radius; // (C - Q) * (C - Q) - r^2
+    auto discriminant = b*b - 4*a*c;
+    return (discriminant >= 0); // Positive discriminant means there is an intersection (1 or 2)
+}
+
 color ray_color(const ray& r) {
+    if (hit_sphere(point3(0, 0, -1), 0.5, r))
+        return color(0.5, 0, 0.5);
+
     // lerp blue to white gradient
     vec3 unit_direction = unit_vector(r.direction());
     // Normalize y direction of ray from [-1.0, 1.0] to [0, 1.0]
