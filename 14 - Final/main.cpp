@@ -10,9 +10,6 @@ int main() {
     // World
     hittable_list world;
 
-    auto R = std::cos(pi/4);
-
-
     auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
     world.add(make_shared<sphere>(point3(0,-1000,0), 1000, ground_material));
 

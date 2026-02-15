@@ -10,8 +10,6 @@ int main() {
     // World
     hittable_list world;
 
-    auto R = std::cos(pi/4);
-
     auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
     auto material_center = make_shared<lambertian>(color(0.1, 0.2, 0.5));
     auto material_left   = make_shared<dielectric>(1.50);
